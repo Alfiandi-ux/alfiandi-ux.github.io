@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel — Alfiandi</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --cream: #f2e8d3;
+            --paper: #f7f0df;
+            --dark: #29251f;
+            --muted: #756e61;
+            --line: #c9bda8;
+            --accent: #9a6f3f;
+            --white: #fffdf8;
+            --danger: #8f3e36;
+            --success: #536c4c;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--dark);
+            color: var(--paper);
+            padding: 30px 22px;
+            z-index: 1000;
+            transition: .3s;
+        }
+
+        .brand {
+            border-bottom: 1px solid #5b554b;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+        }
+
+        .brand h1 {
+            font-family: Georgia, serif;
+            font-size: 36px;
+            font-weight: normal;
+        }
+
+        .brand p {
+            margin-top: 5px;
+            color: #aaa296;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .menu-title {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #8e887d;
+            margin: 25px 10px 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 12px;
+            margin-bottom: 4px;
+            color: #ddd5c8;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: .2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #413c34;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 22px;
+            right: 22px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 75px;
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            position: sticky;
+            top: 0;
+            z-index: 500;
+        }
+
+        .page-title {
+            font-family: Georgia, serif;
+            font-size: 25px;
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .view-site {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid var(--dark);
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            background: var(--dark);
+            color: white;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-family: Georgia, serif;
+        }
+
+        .content {
+            padding: 35px;
+            max-width: 1400px;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: normal;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 24px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .stat-number {
+            font-family: Georgia, serif;
+            font-size: 38px;
+            margin-top: 12px;
+        }
+
+        .stat-desc {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 7px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 25px;
+        }
+
+        .card h3 {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            text-align: left;
+            padding: 13px 10px;
+            border-bottom: 2px solid var(--dark);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 16px 10px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: middle;
+        }
+
+        .article-name {
+            font-family: Georgia, serif;
+            font-size: 16px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 9px;
+            background: #e5dac4;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .status {
+            font-size: 11px;
+            padding: 5px 9px;
+        }
+
+        .published {
+            background: #dfe7d9;
+            color: var(--success);
+        }
+
+        .draft {
+            background: #e9dfce;
+            color: #75613f;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .btn {
+            border: none;
+            padding: 11px 17px;
+            font-size: 12px;
+            letter-spacing: .5px;
+        }
+
+        .btn-primary {
+            background: var(--dark);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #464037;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--dark);
+            color: var(--dark);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 7px;
+        }
+
+        .action-btn {
+            border: 1px solid var(--line);
+            background: transparent;
+            padding: 7px 9px;
+            font-size: 11px;
+        }
+
+        .action-btn:hover {
+            background: #e9dfcc;
+        }
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search {
+            width: 300px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            background: var(--paper);
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: var(--dark);
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-container {
+            max-width: 950px;
+        }
+
+        .form-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            background: #fcf7eb;
+            padding: 13px;
+            font-family: inherit;
+            color: var(--dark);
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--dark);
+        }
+
+        textarea {
+            min-height: 300px;
+            resize: vertical;
+            font-family: Georgia, serif;
+            line-height: 1.7;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .editor {
+            min-height: 400px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* =========================
+           QUICK LINKS
+        ========================= */
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .quick-link {
+            padding: 15px;
+            border: 1px solid var(--line);
+            background: #f0e6d4;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .quick-link:hover {
+            background: #e6dac6;
+        }
+
+        /* =========================
+           ACTIVITY
+        ========================= */
+
+        .activity {
+            list-style: none;
+        }
+
+        .activity li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 13px;
+        }
+
+        .activity li:last-child {
+            border-bottom: none;
+        }
+
+        .activity-date {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           SETTINGS
+        ========================= */
+
+        .setting-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 30px;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .setting-title {
+            font-family: Georgia, serif;
+            font-size: 17px;
+        }
+
+        .setting-desc {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-menu {
+            display: none;
+            border: none;
+            background: transparent;
+            font-size: 25px;
+        }
+
+        @media(max-width: 900px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .content {
+                padding: 22px 15px;
+            }
+
+            .view-site {
+                display: none;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-number {
+                font-size: 28px;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .setting-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .admin-user span {
+                display: none;
+            }
+
+            .topbar {
+                height: 65px;
+            }
+
+            .page-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        <h1>Alfiandi</h1>
+        <p>Administration</p>
+    </div>
+
+    <div class="menu-title">UTAMA</div>
+
+    <a class="nav-link active" data-page="dashboard">
+        <span class="nav-icon">⌂</span>
+        Dashboard
+    </a>
+
+    <a class="nav-link" data-page="articles">
+        <span class="nav-icon">▤</span>
+        Semua Tulisan
+    </a>
+
+    <a class="nav-link" data-page="new-article">
+        <span class="nav-icon">＋</span>
+        Tulis Artikel
+    </a>
+
+    <div class="menu-title">KONTEN</div>
+
+    <a class="nav-link" data-page="opinions">
+        <span class="nav-icon">◌</span>
+        Opini
+    </a>
+
+    <a class="nav-link" data-page="thoughts">
+        <span class="nav-icon">◇</span>
+        Pemikiran
+    </a>
+
+    <a class="nav-link" data-page="technology">
+        <span class="nav-icon">⌘</span>
+        Teknologi
+    </a>
+
+    <a class="nav-link" data-page="tutorial">
+        <span class="nav-icon">▣</span>
+        Tutorial
+    </a>
+
+    <div class="menu-title">LAINNYA</div>
+
+    <a class="nav-link" data-page="messages">
+        <span class="nav-icon">✉</span>
+        Pesan
+    </a>
+
+    <a class="nav-link" data-page="settings">
+        <span class="nav-icon">⚙</span>
+        Pengaturan
+    </a>
+
+    <div class="sidebar-bottom">
+        <a class="nav-link" onclick="logout()">
+            <span class="nav-icon">↪</span>
+            Keluar
+        </a>
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div style="display:flex;align-items:center;gap:15px">
+
+            <button class="mobile-menu" onclick="toggleSidebar()">
+                ☰
+            </button>
+
+            <div class="page-title" id="pageTitle">
+                Dashboard
+            </div>
+
+        </div>
+
+        <div class="top-right">
+
+            <a href="index.html"
+               target="_blank"
+               class="view-site">
+                Lihat Website →
+            </a>
+
+            <div class="admin-user">
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <span>Admin Alfiandi</span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="content">
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================= -->
+
+        <section id="dashboard" class="section active">
+
+            <div class="section-header">
+
+                <h2>Selamat datang kembali.</h2>
+
+                <p>
+                    Kelola seluruh isi website Alfiandi dari satu tempat.
+                </p>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Total Tulisan
+                    </div>
+
+                    <div class="stat-number" id="totalArticles">
+                        12
+                    </div>
+
+                    <div class="stat-desc">
+                        seluruh artikel
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Terbit
+                    </div>
+
+                    <div class="stat-number">
+                        9
+                    </div>
+
+                    <div class="stat-desc">
+                        tulisan publik
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Draft
+                    </div>
+
+                    <div class="stat-number">
+                        3
+                    </div>
+
+                    <div class="stat-desc">
+                        belum diterbitkan
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Pesan
+                    </div>
+
+                    <div class="stat-number">
+                        5
+                    </div>
+
+                    <div class="stat-desc">
+                        dari pembaca
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+
+                <div class="card">
+
+                    <h3>
+                        Tulisan Terbaru
+                    </h3>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td class="article-name">
+                                        Mengapa Kita Masih Membaca?
+                                    </td>
+
+                                    <td>
+                                        <span class="tag">
+                                            Pemikiran
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="status published">
+                                            Terbit
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        09 Agu 2026
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td class="article-name">
+                                        Teknologi dan Masa Depan
+                                    </td>
+
+                                    <td>
+                                        <span class="tag">
+                                            Teknologi
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="status published">
+                                            Terbit
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        07 Agu 2026
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td class="article-name">
+                                        Catatan Tentang Kehidupan
+                                    </td>
+
+                                    <td>
+                                        <span class="tag">
+                                            Opini
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="status draft">
+                                            Draft
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        05 Agu 2026
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Aktivitas
+                    </h3>
+
+                    <ul class="activity">
+
+                        <li>
+                            Artikel baru diterbitkan.
+                            <span class="activity-date">
+                                Hari ini, 16:30
+                            </span>
+                        </li>
+
+                        <li>
+                            Draft artikel diperbarui.
+                            <span class="activity-date">
+                                Hari ini, 14:12
+                            </span>
+                        </li>
+
+                        <li>
+                            Pesan pembaca diterima.
+                            <span class="activity-date">
+                                Kemarin, 21:45
+                            </span>
+                        </li>
+
+                        <li>
+                            Pengaturan website diperbarui.
+                            <span class="activity-date">
+                                7 Agu 2026
+                            </span>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ARTICLES
+        ========================= -->
+
+        <section id="articles" class="section">
+
+            <div class="section-header">
+
+                <h2>Semua Tulisan</h2>
+
+                <p>
+                    Kelola seluruh artikel yang ada di website.
+                </p>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <input
+                    type="search"
+                    class="search"
+                    id="articleSearch"
+                    placeholder="Cari tulisan..."
+                    onkeyup="searchArticles()"
+                >
+
+                <button
+                    class="btn btn-primary"
+                    onclick="showPage('new-article')"
+                >
+                    + Tulis Artikel
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="table-wrapper">
+
+                    <table id="articleTable">
+
+                        <thead>
+
+                            <tr>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td class="article-name">
+                                    Mengapa Kita Masih Membaca?
+                                </td>
+
+                                <td>
+                                    <span class="tag">
+                                        Pemikiran
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status published">
+                                        Terbit
+                                    </span>
+                                </td>
+
+                                <td>
+                                    09 Agu 2026
+                                </td>
+
+                                <td>
+                                    <div class="action-buttons">
+
+                                        <button
+                                            class="action-btn"
+                                            onclick="editArticle(this)"
+                                        >
+                                            Edit
+                                        </button>
+
+                                        <button
+                                            class="action-btn"
+                                            onclick="deleteArticle(this)"
+                                        >
+                                            Hapus
+                                        </button>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <td class="article-name">
+                                    Teknologi dan Masa Depan
+                                </td>
+
+                                <td>
+                                    <span class="tag">
+                                        Teknologi
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status published">
+                                        Terbit
+                                    </span>
+                                </td>
+
+                                <td>
+                                    07 Agu 2026
+                                </td>
+
+                                <td>
+                                    <div class="action-buttons">
+
+                                        <button
+                                            class="action-btn"
+                                            onclick="editArticle(this)"
+                                        >
+                                            Edit
+                                        </button>
+
+                                        <button
+                                            class="action-btn"
+                                            onclick="deleteArticle(this)"
+                                        >
+                                            Hapus
+                                        </button>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <td class="article-name">
+                                    Catatan Tentang Kehidupan
+                                </td>
+
+                                <td>
+                                    <span class="tag">
+                                        Opini
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status draft">
+                                        Draft
+                                    </span>
+                                </td>
+
+                                <td>
+                                    05 Agu 2026
+                                </td>
+
+                                <td>
+                                    <div class="action-buttons">
+
+                                        <button
+                                            class="action-btn"
+                                            onclick="editArticle(this)"
+                                        >
+                                            Edit
+                                        </button>
+
+                                        <button
+                                            class="action-btn"
+                                            onclick="deleteArticle(this)"
+                                        >
+                                            Hapus
+                                        </button>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             NEW ARTICLE
+        ========================= -->
+
+        <section id="new-article" class="section">
+
+            <div class="section-header">
+
+                <h2>Tulis Artikel</h2>
+
+                <p>
+                    Buat tulisan baru untuk website Alfiandi.
+                </p>
+
+            </div>
+
+
+            <div class="form-container">
+
+                <form
+                    class="form-card"
+                    onsubmit="saveArticle(event)"
+                >
+
+                    <div class="form-group">
+
+                        <label>
+                            Judul Artikel
+                        </label>
+
+                        <input
+                            type="text"
+                            id="articleTitle"
+                            placeholder="Masukkan judul tulisan..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Kategori
+                            </label>
+
+                            <select id="articleCategory">
+
+                                <option>
+                                    Pemikiran
+                                </option>
+
+                                <option>
+                                    Opini
+                                </option>
+
+                                <option>
+                                    Teknologi
+                                </option>
+
+                                <option>
+                                    Tutorial
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Status
+                            </label>
+
+                            <select id="articleStatus">
+
+                                <option>
+                                    Terbit
+                                </option>
+
+                                <option>
+                                    Draft
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Ringkasan
+                        </label>
+
+                        <textarea
+                            style="min-height:120px"
+                            id="articleExcerpt"
+                            placeholder="Tuliskan ringkasan artikel..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Isi Artikel
+                        </label>
+
+                        <textarea
+                            class="editor"
+                            id="articleContent"
+                            placeholder="Mulai menulis..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Gambar Utama
+                        </label>
+
+                        <input
+                            type="text"
+                            id="articleImage"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="btn btn-outline"
+                            onclick="showPage('articles')"
+                        >
+                            Batal
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Simpan Artikel
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             OPINION
+        ========================= -->
+
+        <section id="opinions" class="section">
+
+            <div class="section-header">
+
+                <h2>Opini</h2>
+
+                <p>
+                    Semua tulisan yang masuk kategori opini.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Judul</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td class="article-name">
+                                    Catatan Tentang Kehidupan
+                                </td>
+
+                                <td>
+                                    <span class="status draft">
+                                        Draft
+                                    </span>
+                                </td>
+
+                                <td>
+                                    05 Agu 2026
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             THOUGHTS
+        ========================= -->
+
+        <section id="thoughts" class="section">
+
+            <div class="section-header">
+
+                <h2>Pemikiran</h2>
+
+                <p>
+                    Kelola tulisan bertema pemikiran dan refleksi.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td class="article-name">
+                                    Mengapa Kita Masih Membaca?
+                                </td>
+
+                                <td>
+                                    <span class="status published">
+                                        Terbit
+                                    </span>
+                                </td>
+
+                                <td>
+                                    09 Agu 2026
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TECHNOLOGY
+        ========================= -->
+
+        <section id="technology" class="section">
+
+            <div class="section-header">
+
+                <h2>Teknologi</h2>
+
+                <p>
+                    Kelola artikel mengenai teknologi.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Judul</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td class="article-name">
+                                Teknologi dan Masa Depan
+                            </td>
+
+                            <td>
+                                <span class="status published">
+                                    Terbit
+                                </span>
+                            </td>
+
+                            <td>
+                                07 Agu 2026
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TUTORIAL
+        ========================= -->
+
+        <section id="tutorial" class="section">
+
+            <div class="section-header">
+
+                <h2>Tutorial</h2>
+
+                <p>
+                    Kelola artikel tutorial dan panduan.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <p style="color:var(--muted)">
+                    Belum ada tutorial.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MESSAGES
+        ========================= -->
+
+        <section id="messages" class="section">
+
+            <div class="section-header">
+
+                <h2>Pesan Pembaca</h2>
+
+                <p>
+                    Pesan yang dikirim melalui halaman kontak.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Nama</th>
+                            <th>Subjek</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                Andi
+                            </td>
+
+                            <td>
+                                Tentang artikel terbaru
+                            </td>
+
+                            <td>
+                                09 Agu 2026
+                            </td>
+
+                            <td>
+                                <span class="status published">
+                                    Baru
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Raka
+                            </td>
+
+                            <td>
+                                Pertanyaan
+                            </td>
+
+                            <td>
+                                08 Agu 2026
+                            </td>
+
+                            <td>
+                                <span class="status draft">
+                                    Dibaca
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS
+        ========================= -->
+
+        <section id="settings" class="section">
+
+            <div class="section-header">
+
+                <h2>Pengaturan</h2>
+
+                <p>
+                    Atur identitas dan informasi website.
+                </p>
+
+            </div>
+
+
+            <div class="form-card">
+
+                <div class="setting-row">
+
+                    <div>
+
+                        <div class="setting-title">
+                            Nama Website
+                        </div>
+
+                        <div class="setting-desc">
+                            Nama utama website.
+                        </div>
+
+                    </div>
+
+                    <input
+                        type="text"
+                        value="Alfiandi"
+                    >
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div>
+
+                        <div class="setting-title">
+                            Deskripsi
+                        </div>
+
+                        <div class="setting-desc">
+                            Deskripsi yang muncul di halaman depan.
+                        </div>
+
+                    </div>
+
+                    <input
+                        type="text"
+                        value="Catatan tentang pemikiran, kehidupan, dan dunia di sekitar kita."
+                    >
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div>
+
+                        <div class="setting-title">
+                            Nama Penulis
+                        </div>
+
+                        <div class="setting-desc">
+                            Nama yang ditampilkan pada artikel.
+                        </div>
+
+                    </div>
+
+                    <input
+                        type="text"
+                        value="Alfiandi"
+                    >
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div>
+
+                        <div class="setting-title">
+                            Email Kontak
+                        </div>
+
+                        <div class="setting-desc">
+                            Email yang digunakan pembaca.
+                        </div>
+
+                    </div>
+
+                    <input
+                        type="email"
+                        placeholder="email@contoh.com"
+                    >
+
+                </div>
+
+
+                <div style="margin-top:25px">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="saveSettings()"
+                    >
+                        Simpan Pengaturan
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    const links =
+        document.querySelectorAll(".nav-link[data-page]");
+
+    links.forEach(link => {
+
+        link.addEventListener("click", function() {
+
+            const page =
+                this.getAttribute("data-page");
+
+            showPage(page);
+
+            document
+                .getElementById("sidebar")
+                .classList.remove("open");
+
+        });
+
+    });
+
+
+    function showPage(page) {
+
+        document
+            .querySelectorAll(".section")
+            .forEach(section => {
+                section.classList.remove("active");
+            });
+
+        const target =
+            document.getElementById(page);
+
+        if (target) {
+            target.classList.add("active");
+        }
+
+
+        links.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (
+                link.getAttribute("data-page")
+                === page
+            ) {
+                link.classList.add("active");
+            }
+
+        });
+
+
+        const titles = {
+
+            dashboard: "Dashboard",
+
+            articles: "Semua Tulisan",
+
+            "new-article": "Tulis Artikel",
+
+            opinions: "Opini",
+
+            thoughts: "Pemikiran",
+
+            technology: "Teknologi",
+
+            tutorial: "Tutorial",
+
+            messages: "Pesan",
+
+            settings: "Pengaturan"
+
+        };
+
+        document
+            .getElementById("pageTitle")
+            .textContent =
+            titles[page] || "Admin";
+
+    }
+
+
+    /* =========================
+       MOBILE SIDEBAR
+    ========================= */
+
+    function toggleSidebar() {
+
+        document
+            .getElementById("sidebar")
+            .classList.toggle("open");
+
+    }
+
+
+    /* =========================
+       SAVE ARTICLE
+    ========================= */
+
+    function saveArticle(event) {
+
+        event.preventDefault();
+
+        const title =
+            document
+                .getElementById("articleTitle")
+                .value;
+
+        const category =
+            document
+                .getElementById("articleCategory")
+                .value;
+
+        const status =
+            document
+                .getElementById("articleStatus")
+                .value;
+
+        const content =
+            document
+                .getElementById("articleContent")
+                .value;
+
+
+        if (!title || !content) {
+
+            alert(
+                "Judul dan isi artikel wajib diisi."
+            );
+
+            return;
+
+        }
+
+
+        const article = {
+
+            title: title,
+
+            category: category,
+
+            status: status,
+
+            content: content,
+
+            date: new Date()
+                .toLocaleDateString(
+                    "id-ID",
+                    {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                    }
+                )
+
+        };
+
+
+        let articles =
+            JSON.parse(
+                localStorage.getItem("alfiandiArticles")
+            ) || [];
+
+
+        articles.push(article);
+
+
+        localStorage.setItem(
+            "alfiandiArticles",
+            JSON.stringify(articles)
+        );
+
+
+        alert(
+            "Artikel berhasil disimpan."
+        );
+
+
+        document
+            .querySelector("form")
+            .reset();
+
+
+        showPage("articles");
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function searchArticles() {
+
+        const search =
+            document
+                .getElementById("articleSearch")
+                .value
+                .toLowerCase();
+
+        const rows =
+            document
+                .querySelectorAll(
+                    "#articleTable tbody tr"
+                );
+
+
+        rows.forEach(row => {
+
+            const text =
+                row.textContent.toLowerCase();
+
+            row.style.display =
+                text.includes(search)
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+
+
+    /* =========================
+       DELETE
+    ========================= */
+
+    function deleteArticle(button) {
+
+        const row =
+            button.closest("tr");
+
+        const title =
+            row.querySelector(
+                ".article-name"
+            ).textContent.trim();
+
+
+        const confirmDelete =
+            confirm(
+                `Hapus artikel "${title}"?`
+            );
+
+
+        if (confirmDelete) {
+
+            row.remove();
+
+            alert(
+                "Artikel berhasil dihapus."
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       EDIT
+    ========================= */
+
+    function editArticle(button) {
+
+        const row =
+            button.closest("tr");
+
+        const title =
+            row.querySelector(
+                ".article-name"
+            ).textContent.trim();
+
+
+        document
+            .getElementById("articleTitle")
+            .value = title;
+
+
+        showPage("new-article");
+
+    }
+
+
+    /* =========================
+       SETTINGS
+    ========================= */
+
+    function saveSettings() {
+
+        alert(
+            "Pengaturan berhasil disimpan."
+        );
+
+    }
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    function logout() {
+
+        const confirmLogout =
+            confirm(
+                "Apakah Anda yakin ingin keluar?"
+            );
+
+
+        if (confirmLogout) {
+
+            alert(
+                "Anda telah keluar dari panel admin."
+            );
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }
+
+
+    /* =========================
+       LOAD SAVED ARTICLES
+    ========================= */
+
+    function loadArticles() {
+
+        const articles =
+            JSON.parse(
+                localStorage.getItem(
+                    "alfiandiArticles"
+                )
+            ) || [];
+
+
+        const total =
+            document.getElementById(
+                "totalArticles"
+            );
+
+
+        if (total) {
+
+            total.textContent =
+                12 + articles.length;
+
+        }
+
+    }
+
+
+    loadArticles();
+
+</script>
+
+</body>
+  </html>
