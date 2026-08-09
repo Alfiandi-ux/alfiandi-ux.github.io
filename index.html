@@ -7,7 +7,7 @@
     <title>Alfiandi — Catatan dan Pemikiran</title>
 
     <meta name="description"
-          content="Alfiandi — blog pribadi tentang sejarah, sastra, budaya, pemikiran, dan kehidupan.">
+          content="Alfiandi — blog pribadi tentang pemikiran, kehidupan, opini, dan berbagai catatan.">
 
     <style>
         * {
@@ -32,9 +32,7 @@
             text-decoration: none;
         }
 
-        /* =========================
-           HEADER
-        ========================== */
+        /* HEADER */
 
         header {
             max-width: 1200px;
@@ -72,9 +70,7 @@
             font-size: 16px;
         }
 
-        /* =========================
-           NAVIGATION
-        ========================== */
+        /* NAVIGATION */
 
         nav {
             border-top: 1px solid #9b907e;
@@ -82,7 +78,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 35px;
             padding: 12px;
             font-family: Arial, sans-serif;
             font-size: 12px;
@@ -98,9 +94,7 @@
             opacity: 0.5;
         }
 
-        /* =========================
-           MAIN
-        ========================== */
+        /* MAIN */
 
         main {
             max-width: 1200px;
@@ -125,9 +119,7 @@
             flex: 1;
         }
 
-        /* =========================
-           FEATURED ARTICLE
-        ========================== */
+        /* ARTIKEL UTAMA */
 
         .featured {
             display: grid;
@@ -139,12 +131,13 @@
 
         .featured-image {
             min-height: 420px;
+
             background:
                 linear-gradient(
                     rgba(35, 29, 22, 0.15),
                     rgba(35, 29, 22, 0.45)
                 ),
-                url("https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200&q=80")
+                url("https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80")
                 center / cover;
 
             filter: sepia(35%);
@@ -212,9 +205,7 @@
             font-style: italic;
         }
 
-        /* =========================
-           ARTICLES
-        ========================== */
+        /* ARTIKEL */
 
         .articles {
             margin-top: 45px;
@@ -241,17 +232,17 @@
 
         .image-1 {
             background-image:
-                url("https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=800&q=80");
+                url("https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80");
         }
 
         .image-2 {
             background-image:
-                url("https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=800&q=80");
+                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80");
         }
 
         .image-3 {
             background-image:
-                url("https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=800&q=80");
+                url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80");
         }
 
         .article h3 {
@@ -270,9 +261,7 @@
             font-size: 15px;
         }
 
-        /* =========================
-           QUOTE
-        ========================== */
+        /* KUTIPAN */
 
         .quote {
             margin: 65px auto;
@@ -298,62 +287,30 @@
             text-transform: uppercase;
         }
 
-        /* =========================
-           NEWSLETTER
-        ========================== */
+        /* TENTANG */
 
-        .newsletter {
+        .about {
             text-align: center;
             background: #29251f;
             color: #eee4cf;
-            padding: 45px 25px;
+            padding: 50px 25px;
             margin-top: 60px;
         }
 
-        .newsletter h2 {
-            font-size: 32px;
+        .about h2 {
+            font-size: 34px;
             font-weight: normal;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .newsletter p {
-            color: #c9bda8;
-            margin-bottom: 25px;
-        }
-
-        .newsletter form {
-            display: flex;
-            max-width: 500px;
+        .about p {
+            max-width: 650px;
             margin: auto;
+            color: #c9bda8;
+            font-size: 16px;
         }
 
-        .newsletter input {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            background: #eee4cf;
-            color: #29251f;
-            font-family: Georgia, serif;
-        }
-
-        .newsletter button {
-            padding: 14px 22px;
-            border: none;
-            background: #b8a88e;
-            color: #29251f;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .newsletter button:hover {
-            background: #d0c1aa;
-        }
-
-        /* =========================
-           FOOTER
-        ========================== */
+        /* FOOTER */
 
         footer {
             max-width: 1200px;
@@ -370,9 +327,7 @@
             margin-bottom: 10px;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================== */
+        /* RESPONSIVE */
 
         @media (max-width: 800px) {
 
@@ -398,7 +353,7 @@
             }
 
             nav {
-                gap: 15px;
+                gap: 18px;
             }
         }
 
@@ -419,16 +374,6 @@
             .excerpt {
                 font-size: 16px;
             }
-
-            .newsletter form {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .newsletter input,
-            .newsletter button {
-                width: 100%;
-            }
         }
     </style>
 </head>
@@ -444,19 +389,20 @@
         </div>
 
         <div class="brand">
+
             <h1>Alfiandi</h1>
 
             <p>
-                Catatan tentang sejarah, manusia,
-                pemikiran, dan kehidupan.
+                Catatan tentang pemikiran, kehidupan,
+                dan dunia di sekitar kita.
             </p>
+
         </div>
 
         <nav>
             <a href="#">Beranda</a>
-            <a href="#">Sejarah</a>
-            <a href="#">Sastra</a>
-            <a href="#">Budaya</a>
+            <a href="#">Tulisan</a>
+            <a href="#">Opini</a>
             <a href="#">Pemikiran</a>
             <a href="#">Tentang Saya</a>
         </nav>
@@ -478,27 +424,29 @@
         <section class="featured">
 
             <div class="featured-image">
-                <span>Sejarah</span>
+
+                <span>
+                    Pemikiran
+                </span>
+
             </div>
 
             <article class="featured-content">
 
                 <div class="category">
-                    Esai · 12 Menit Membaca
+                    Esai · 10 Menit Membaca
                 </div>
 
                 <h2>
                     <a href="#">
-                        Ketika Sebuah Bangsa Belajar Berdiri
-                        di Atas Kakinya Sendiri
+                        Tentang Cara Kita Melihat Dunia
                     </a>
                 </h2>
 
                 <p class="excerpt">
-                    Sejarah bukan sekadar kumpulan tanggal
-                    dan nama. Ia adalah rekaman tentang manusia
-                    yang mencoba memahami zamannya dan menentukan
-                    arah masa depan.
+                    Dunia yang sama dapat terlihat berbeda
+                    bagi setiap manusia. Barangkali bukan dunia
+                    yang berubah, melainkan cara kita memandangnya.
                 </p>
 
                 <div class="meta">
@@ -530,19 +478,20 @@
                     <div class="article-image image-1"></div>
 
                     <div class="category">
-                        Sastra
+                        Catatan
                     </div>
 
                     <h3>
                         <a href="#">
-                            Mengapa Kita Masih Membaca
-                            Buku-Buku Lama?
+                            Mengapa Kita Sering
+                            Takut Memulai?
                         </a>
                     </h3>
 
                     <p>
-                        Ada sesuatu yang tidak dimiliki zaman kita:
-                        kesabaran untuk mendengarkan suara dari masa lalu.
+                        Banyak hal tidak pernah dimulai bukan
+                        karena kita tidak mampu, melainkan karena
+                        terlalu banyak memikirkan kemungkinan.
                     </p>
 
                     <div class="meta">
@@ -557,20 +506,21 @@
                     <div class="article-image image-2"></div>
 
                     <div class="category">
-                        Pemikiran
+                        Kehidupan
                     </div>
 
                     <h3>
                         <a href="#">
-                            Tentang Waktu, Ingatan,
-                            dan Kehidupan
+                            Tentang Waktu,
+                            Pilihan, dan Penyesalan
                         </a>
                     </h3>
 
                     <p>
-                        Waktu berjalan tanpa pernah meminta izin.
-                        Namun manusia selalu berusaha meninggalkan
-                        sesuatu yang membuatnya dikenang.
+                        Waktu tidak pernah berhenti. Yang bisa kita
+                        lakukan hanyalah memilih bagaimana kita
+                        menggunakan bagian kecil yang diberikan
+                        kepada kita.
                     </p>
 
                     <div class="meta">
@@ -585,20 +535,20 @@
                     <div class="article-image image-3"></div>
 
                     <div class="category">
-                        Budaya
+                        Opini
                     </div>
 
                     <h3>
                         <a href="#">
-                            Kota-Kota Tua dan Cerita
-                            yang Mereka Simpan
+                            Tidak Semua Hal
+                            Harus Kita Pahami
                         </a>
                     </h3>
 
                     <p>
-                        Setiap jalan memiliki kenangan.
-                        Setiap bangunan menyimpan kehidupan
-                        orang-orang yang pernah melewatinya.
+                        Ada pertanyaan yang mungkin tidak memiliki
+                        jawaban. Dan mungkin, menerima ketidakpastian
+                        adalah bagian dari menjadi manusia.
                     </p>
 
                     <div class="meta">
@@ -617,8 +567,8 @@
         <section class="quote">
 
             <p>
-                “Menulis adalah cara sederhana untuk
-                membuat pikiran tetap hidup.”
+                “Menulis adalah cara sederhana
+                untuk membuat pikiran tetap hidup.”
             </p>
 
             <span>
@@ -630,14 +580,16 @@
 
         <!-- TENTANG -->
 
-        <section class="newsletter">
+        <section class="about">
 
-            <h2>Tentang Alfiandi</h2>
+            <h2>
+                Tentang Alfiandi
+            </h2>
 
             <p>
-                Sebuah ruang kecil untuk menyimpan gagasan,
-                cerita, sejarah, dan pemikiran tentang dunia
-                yang terus berubah.
+                Sebuah ruang pribadi untuk menulis,
+                berpikir, mencatat, dan berbagi pandangan
+                tentang berbagai hal yang menarik perhatian.
             </p>
 
         </section>
@@ -660,34 +612,45 @@
     </footer>
 
 
+    <!-- ANIMASI -->
+
     <script>
 
-        // Animasi sederhana ketika halaman dimuat
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
 
-        document.addEventListener("DOMContentLoaded", function () {
+                const articles =
+                    document.querySelectorAll(".article");
 
-            const articles =
-                document.querySelectorAll(".article");
+                articles.forEach(
+                    function (article, index) {
 
-            articles.forEach(function (article, index) {
+                        article.style.opacity = "0";
+                        article.style.transform =
+                            "translateY(20px)";
 
-                article.style.opacity = "0";
-                article.style.transform = "translateY(20px)";
-                article.style.transition =
-                    "opacity 0.6s ease, transform 0.6s ease";
+                        article.style.transition =
+                            "opacity 0.6s ease, " +
+                            "transform 0.6s ease";
 
-                setTimeout(function () {
+                        setTimeout(
+                            function () {
 
-                    article.style.opacity = "1";
-                    article.style.transform = "translateY(0)";
+                                article.style.opacity = "1";
 
-                }, 150 * index);
+                                article.style.transform =
+                                    "translateY(0)";
 
-            });
-
-        });
+                            },
+                            150 * index
+                        );
+                    }
+                );
+            }
+        );
 
     </script>
 
 </body>
-        </html>
+    </html>
