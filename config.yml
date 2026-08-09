@@ -1,0 +1,7 @@
+title: Alfiandi
+description: "Catatan tentang pemikiran, kehidupan, dan dunia di sekitar kita."
+markdown: kramdown
+permalink: /:year/:month/:day/:title.html
+exclude:
+  - admin
+  - README.md
