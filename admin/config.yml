@@ -29,8 +29,8 @@ auth:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Site links in Decap CMS
-site_url: https://alfiandi-ux.github.io
-display_url: https://alfiandi-ux.github.io
+site_url: https://alfiandi-ux.github.io/Alfiandi/#
+display_url: https://alfiandi-ux.github.io/Alfiandi/#
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
