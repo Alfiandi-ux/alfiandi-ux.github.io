@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} — Alfiandi{% else %}Alfiandi — Catatan dan Pemikiran{% endif %}</title>
+    <meta name="description" content="Alfiandi — blog pribadi tentang pemikiran, kehidupan, opini, dan berbagai catatan.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: #eee4cf; color: #29251f; font-family: Georgia, "Times New Roman", serif; line-height: 1.7; }
+        a { color: inherit; text-decoration: none; }
+        header { max-width: 1200px; margin: auto; padding: 30px 25px 0; }
+        .top-line { border-top: 2px solid #29251f; border-bottom: 1px solid #29251f; padding: 8px 0; text-align: center; font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
+        .brand { text-align: center; padding: 30px 10px; }
+        .brand h1 { font-size: clamp(48px, 8vw, 90px); font-weight: normal; letter-spacing: -4px; line-height: 1; }
+        .brand p { margin-top: 12px; font-style: italic; color: #655d50; font-size: 16px; }
+        nav { border-top: 1px solid #9b907e; border-bottom: 2px solid #29251f; display: flex; justify-content: center; flex-wrap: wrap; gap: 35px; padding: 12px; font-family: Arial, sans-serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; }
+        nav a { transition: opacity 0.2s; }
+        nav a:hover { opacity: 0.5; }
+        main { max-width: 1200px; margin: auto; padding: 45px 25px; }
+        .section-title { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+        .section-title::after { content: ""; height: 1px; background: #9b907e; flex: 1; }
+        .featured { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; padding-bottom: 45px; border-bottom: 1px solid #9b907e; }
+        .featured-image { min-height: 420px; background: linear-gradient(rgba(35,29,22,0.15), rgba(35,29,22,0.45)), var(--img) center / cover; filter: sepia(35%); display: flex; align-items: flex-end; padding: 25px; }
+        .featured-image span { background: #eee4cf; padding: 7px 13px; font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        .featured-content { display: flex; flex-direction: column; justify-content: center; }
+        .category { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #746957; margin-bottom: 15px; }
+        .featured-content h2 { font-size: clamp(34px, 4vw, 55px); font-weight: normal; line-height: 1.08; margin-bottom: 20px; }
+        .featured-content h2 a:hover { text-decoration: underline; }
+        .excerpt { font-size: 18px; color: #514a3e; margin-bottom: 25px; }
+        .meta { font-family: Arial, sans-serif; font-size: 11px; color: #746957; letter-spacing: 1px; text-transform: uppercase; }
+        .read-more { margin-top: 25px; display: inline-block; width: fit-content; border-bottom: 1px solid #29251f; padding-bottom: 3px; font-style: italic; }
+        .articles { margin-top: 45px; }
+        .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+        .article { border-bottom: 1px solid #9b907e; padding-bottom: 30px; }
+        .article-image { height: 220px; margin-bottom: 20px; background-size: cover; background-position: center; filter: sepia(35%); background-color: #cabf a8; }
+        .article h3 { font-size: 27px; font-weight: normal; line-height: 1.2; margin: 10px 0 12px; }
+        .article h3 a:hover { text-decoration: underline; }
+        .article p { color: #5d5548; font-size: 15px; }
+        .about { text-align: center; background: #29251f; color: #eee4cf; padding: 50px 25px; margin-top: 60px; }
+        .about h2 { font-size: 34px; font-weight: normal; margin-bottom: 15px; }
+        .about p { max-width: 650px; margin: auto; color: #c9bda8; font-size: 16px; }
+        footer { max-width: 1200px; margin: auto; padding: 35px 25px; text-align: center; font-size: 13px; color: #746957; }
+        .footer-title { font-size: 25px; color: #29251f; margin-bottom: 10px; }
+        .post-body { max-width: 750px; margin: auto; font-size: 18px; }
+        .post-body img { max-width: 100%; margin: 20px 0; }
+        @media (max-width: 800px) {
+            .featured { grid-template-columns: 1fr; gap: 25px; }
+            .featured-image { min-height: 300px; }
+            .article-grid { grid-template-columns: 1fr; }
+            .article-image { height: 260px; }
+            nav { gap: 18px; }
+        }
+        @media (max-width: 500px) {
+            main { padding: 30px 18px; }
+            .brand h1 { letter-spacing: -2px; }
+            .featured-content h2 { font-size: 36px; }
+            .excerpt { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-line">Edisi {{ site.time | date: "%A" }} · {{ site.time | date: "%-d %B %Y" }}</div>
+        <div class="brand">
+            <h1><a href="{{ '/' | relative_url }}">Alfiandi</a></h1>
+            <p>Catatan tentang pemikiran, kehidupan, dan dunia di sekitar kita.</p>
+        </div>
+        <nav>
+            <a href="{{ '/' | relative_url }}">Beranda</a>
+            <a href="{{ '/tulisan.html' | relative_url }}">Tulisan</a>
+            <a href="{{ '/opini.html' | relative_url }}">Opini</a>
+            <a href="{{ '/pemikiran.html' | relative_url }}">Pemikiran</a>
+            <a href="{{ '/tentang.html' | relative_url }}">Tentang Saya</a>
+        </nav>
+    </header>
+    <main>
+        {{ content }}
+    </main>
+    <footer>
+        <div class="footer-title">Alfiandi</div>
+        <p>© {{ site.time | date: "%Y" }} Alfiandi · Tulisan dan pemikiran pribadi.</p>
+    </footer>
+</body>
+</html>
