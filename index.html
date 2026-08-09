@@ -1,40 +1,145 @@
----
-layout: default
----
-<div class="section-title">Tulisan Pilihan</div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfiandi-ux | Journal & Thoughts</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
-{% assign latest = site.posts.first %}
-{% if latest %}
-<section class="featured">
-    <div class="featured-image" style="--img: url('{{ latest.image | default: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80" | relative_url }}');">
-        <span>{{ latest.category }}</span>
-    </div>
-    <article class="featured-content">
-        <div class="category">{{ latest.category }}</div>
-        <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
-        <p class="excerpt">{{ latest.excerpt }}</p>
-        <div class="meta">Oleh Alfiandi · {{ latest.date | date: "%-d %B %Y" }}</div>
-        <a href="{{ latest.url | relative_url }}" class="read-more">Baca selengkapnya →</a>
-    </article>
-</section>
-{% endif %}
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-xl font-bold tracking-tight text-slate-900 hover:text-blue-600 transition-colors">
+                    Alfiandi<span class="text-blue-600">.ux</span>
+                </a>
+                <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <a href="#" class="text-blue-600 font-semibold">Beranda</a>
+                    <a href="#pilihan" class="hover:text-blue-600 transition-colors">Tulisan Pilihan</a>
+                    <a href="#opini" class="hover:text-blue-600 transition-colors">Opini</a>
+                    <a href="#terbaru" class="hover:text-blue-600 transition-colors">Tulisan Terbaru</a>
+                </nav>
+                <div class="flex items-center gap-3">
+                    <button class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-full transition-colors">
+                        Kontak
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<section class="articles">
-    <div class="section-title">Tulisan Terbaru</div>
-    <div class="article-grid">
-        {% for post in site.posts limit:6 offset:1 %}
-        <article class="article">
-            <div class="article-image" style="background-image: url('{{ post.image | relative_url }}');"></div>
-            <div class="category">{{ post.category }}</div>
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p>{{ post.excerpt }}</p>
-            <div class="meta">Alfiandi · {{ post.date | date: "%-d %B %Y" }}</div>
-        </article>
-        {% endfor %}
-    </div>
-</section>
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
 
-<section class="about">
-    <h2>Tentang Alfiandi</h2>
-    <p>Sebuah ruang pribadi untuk menulis, berpikir, mencatat, dan berbagi pandangan tentang berbagai hal yang menarik perhatian.</p>
-    </section>
+        <!-- Hero Section / Featured Post -->
+        <section id="pilihan" class="mb-12">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Tulisan Pilihan</span>
+            </div>
+            <article class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-all group">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full">Opini</span>
+                    <span class="text-xs text-slate-400">•</span>
+                    <span class="text-xs text-slate-500">9 August 2026</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    <a href="#">Test</a>
+                </h1>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                    Apakah bisa? Catatan dan gagasan seputar desain antarmuka, pengalaman pengguna, dan riset visual yang dikemas secara sistematis.
+                </p>
+                <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
+                            A
+                        </div>
+                        <span class="font-medium text-slate-700">Alfiandi</span>
+                    </div>
+                    <a href="#" class="text-blue-600 font-semibold hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Baca selengkapnya <span>→</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Recent Posts Section -->
+        <section id="terbaru">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-slate-900">Tulisan Terbaru</h2>
+                <div class="flex space-x-2 text-xs">
+                    <button class="bg-slate-900 text-white px-3 py-1.5 rounded-lg font-medium">Semua</button>
+                    <button class="bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Opini</button>
+                    <button class="bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg font-medium transition-colors">Tulisan</button>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid sm:grid-cols-2 gap-6">
+                
+                <!-- Card 1 -->
+                <article class="bg-white rounded-xl p-6 shadow-sm border border-slate-200/80 hover:border-slate-300 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-0.5 rounded">Opini</span>
+                            <span class="text-xs text-slate-400">9 August 2026</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            <a href="#">New</a>
+                        </h3>
+                        <p class="text-slate-600 text-sm line-clamp-2 mb-4">
+                            Abcdefg... Pembahasan mendalam mengenai perspektif UX dan perkembangan teknologi web masa depan.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                        <span>Oleh <strong>Alfiandi</strong></span>
+                        <a href="#" class="text-blue-600 font-semibold group-hover:underline">Baca →</a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="bg-white rounded-xl p-6 shadow-sm border border-slate-200/80 hover:border-slate-300 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-0.5 rounded">Tulisan</span>
+                            <span class="text-xs text-slate-400">9 August 2026</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            <a href="#">New1</a>
+                        </h3>
+                        <p class="text-slate-600 text-sm line-clamp-2 mb-4">
+                            Abcdefg... Catatan proses desain dan studi kasus pengerjaan antarmuka pengguna.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                        <span>Oleh <strong>Alfiandi</strong></span>
+                        <a href="#" class="text-blue-600 font-semibold group-hover:underline">Baca →</a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 mt-12">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+            <p>© 2026 Alfiandi-ux. Dibuat dengan presisi visual.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-slate-900 transition-colors">GitHub</a>
+                <a href="#" class="hover:text-slate-900 transition-colors">LinkedIn</a>
+                <a href="#" class="hover:text-slate-900 transition-colors">Dribbble</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
