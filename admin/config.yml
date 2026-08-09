@@ -1,5 +1,5 @@
 backend:
-  name: github
+  name: git-gateway
   repo: alfiandi-ux/alfiandi-ux.github.io   # GANTI: username/nama-repo GitHub kamu
   branch: main                              # sesuaikan kalau branch utamamu bukan "main"
 
