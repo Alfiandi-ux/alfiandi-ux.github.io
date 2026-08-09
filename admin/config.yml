@@ -46,9 +46,6 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     identifier_field: title
     fields:
-      # --- INI ADALAH KODE YANG DITAMBAHKAN ---
-      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
-      # ----------------------------------------
       - { label: "Judul", name: "title", widget: "string" }
       - { label: "Tanggal", name: "date", widget: "datetime" }
       - label: "Kategori"
