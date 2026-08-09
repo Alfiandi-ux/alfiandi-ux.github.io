@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: alfiandi-ux/alfiandi-ux.github.io   # GANTI: username/nama-repo GitHub kamu
+  branch: main                              # sesuaikan kalau branch utamamu bukan "main"
+
+# Wajib diisi kalau situs diakses langsung (bukan lewat Netlify)
+site_url: https://alfiandi-ux.github.io
+display_url: https://alfiandi-ux.github.io
+
+media_folder: "assets/images/uploads"   # tempat gambar disimpan di repo
+public_folder: "/assets/images/uploads" # path gambar saat dipakai di halaman
+
+publish_mode: editorial_workflow   # tulisan baru masuk sebagai draft/PR dulu sebelum tayang
+
+collections:
+  - name: "posts"
+    label: "Tulisan"
+    label_singular: "Tulisan"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Tanggal", name: "date", widget: "datetime" }
+      - label: "Kategori"
+        name: "category"
+        widget: "select"
+        options: ["Tulisan", "Opini", "Pemikiran"]
+      - { label: "Ringkasan", name: "excerpt", widget: "text", required: false }
+      - { label: "Gambar Sampul", name: "image", widget: "image", required: false }
+      - { label: "Isi Tulisan", name: "body", widget: "markdown" }
