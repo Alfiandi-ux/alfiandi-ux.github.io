@@ -2,7 +2,7 @@
 backend:
   name: git-gateway
   repo: Alfiandi-ux/alfiandi-ux.github.io
-  branch: main
+  branch: admin
   auth_type: pkce
   base_url: https://auth.decapbridge.com
   auth_endpoint: /sites/addda0f6-73fc-4e06-8650-8a2949633fc9/pkce
