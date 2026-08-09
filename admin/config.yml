@@ -1,8 +1,31 @@
+# Pengaturan Backend menggunakan DecapBridge PKCE untuk GitHub Pages
 backend:
   name: github
-  repo: alfiandi-ux/alfiandi-ux.github.io
+  repo: Alfiandi-ux/alfiandi-ux.github.io
   branch: main
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/addda0f6-73fc-4e06-8650-8a2949633fc9/pkce
+  auth_token_endpoint: /sites/addda0f6-73fc-4e06-8650-8a2949633fc9/token
 
+  # Log aktivitas commit
+  commit_messages:
+    create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+
+auth:
+  email_claim: email
+  first_name_claim: first_name
+  last_name_claim: last_name
+  avatar_url_claim: avatar_url
+
+logo_url: https://decapbridge.com/decapcms-with-bridge.svg
+site_url: https://alfiandi-ux.github.io
+
+# INI BAGIAN YANG SEBELUMNYA HILANG (Sangat Wajib!)
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
