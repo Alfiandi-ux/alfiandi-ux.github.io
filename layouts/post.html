@@ -1,0 +1,10 @@
+---
+layout: default
+---
+<div class="section-title">{{ page.category }}</div>
+<article class="post-body">
+    {% if page.image %}<img src="{{ page.image | relative_url }}" alt="{{ page.title }}">{% endif %}
+    <h1 style="font-weight:normal; font-size:42px; margin-bottom:10px;">{{ page.title }}</h1>
+    <div class="meta" style="margin-bottom:25px;">Alfiandi · {{ page.date | date: "%-d %B %Y" }}</div>
+    {{ content }}
+</article>
