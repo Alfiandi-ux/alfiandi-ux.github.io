@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: alfiandi-ux/alfiandi-ux.github.io # Pastikan ini sesuai dengan nama repository Anda
+  branch: main # Atau master (sesuaikan dengan nama branch utama Anda)
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "tulisan"
+    label: "Tulisan"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Cover Image", name: "image", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
