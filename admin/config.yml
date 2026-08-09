@@ -1,6 +1,6 @@
 backend:
-  name: git-gateway.                        # GANTI: username/nama-repo GitHub kamu
-  branch: main                              # sesuaikan kalau branch utamamu bukan "main"
+  name: git-gateway
+  branch: main
 
 # Wajib diisi kalau situs diakses langsung (bukan lewat Netlify)
 site_url: https://alfiandi-ux.github.io
