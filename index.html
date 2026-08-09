@@ -3,143 +3,691 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Alfiandi</title>
+
+    <title>Alfiandi — Catatan dan Pemikiran</title>
+
+    <meta name="description"
+          content="Alfiandi — blog pribadi tentang sejarah, sastra, budaya, pemikiran, dan kehidupan.">
+
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            padding: 20px;
+            background: #eee4cf;
+            color: #29251f;
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.7;
         }
-        .container {
-            max-width: 750px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
+
+        /* =========================
+           HEADER
+        ========================== */
+
         header {
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 25px 0;
         }
-        header h1 {
-            font-size: 2.2rem;
-            color: #1a1a1a;
-        }
-        header p {
-            color: #666;
-            font-size: 1rem;
-            margin-top: 5px;
-        }
-        nav {
-            margin-top: 20px;
-        }
-        nav a {
-            margin-right: 15px;
-            color: #0066cc;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .post {
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #eee;
-        }
-        .post:last-child {
-            border-bottom: none;
-        }
-        .post-title {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-        .post-title a {
-            color: #222;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .post-title a:hover {
-            color: #0066cc;
-        }
-        .post-date {
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 12px;
-        }
-        .post-excerpt {
-            color: #555;
-            font-size: 1rem;
-            margin-bottom: 12px;
-        }
-        .read-more {
-            display: inline-block;
-            color: #0066cc;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-        .read-more:hover {
-            text-decoration: underline;
-        }
-        footer {
-            margin-top: 40px;
+
+        .top-line {
+            border-top: 2px solid #29251f;
+            border-bottom: 1px solid #29251f;
+            padding: 8px 0;
             text-align: center;
-            color: #888;
-            font-size: 0.85rem;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .brand h1 {
+            font-size: clamp(48px, 8vw, 90px);
+            font-weight: normal;
+            letter-spacing: -4px;
+            line-height: 1;
+        }
+
+        .brand p {
+            margin-top: 12px;
+            font-style: italic;
+            color: #655d50;
+            font-size: 16px;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        nav {
+            border-top: 1px solid #9b907e;
+            border-bottom: 2px solid #29251f;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 12px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            transition: opacity 0.2s;
+        }
+
+        nav a:hover {
+            opacity: 0.5;
+        }
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 45px 25px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            background: #9b907e;
+            flex: 1;
+        }
+
+        /* =========================
+           FEATURED ARTICLE
+        ========================== */
+
+        .featured {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            padding-bottom: 45px;
+            border-bottom: 1px solid #9b907e;
+        }
+
+        .featured-image {
+            min-height: 420px;
+            background:
+                linear-gradient(
+                    rgba(35, 29, 22, 0.15),
+                    rgba(35, 29, 22, 0.45)
+                ),
+                url("https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200&q=80")
+                center / cover;
+
+            filter: sepia(35%);
+
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+        }
+
+        .featured-image span {
+            background: #eee4cf;
+            padding: 7px 13px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .featured-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .category {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #746957;
+            margin-bottom: 15px;
+        }
+
+        .featured-content h2 {
+            font-size: clamp(34px, 4vw, 55px);
+            font-weight: normal;
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+
+        .featured-content h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .excerpt {
+            font-size: 18px;
+            color: #514a3e;
+            margin-bottom: 25px;
+        }
+
+        .meta {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: #746957;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .read-more {
+            margin-top: 25px;
+            display: inline-block;
+            width: fit-content;
+            border-bottom: 1px solid #29251f;
+            padding-bottom: 3px;
+            font-style: italic;
+        }
+
+        /* =========================
+           ARTICLES
+        ========================== */
+
+        .articles {
+            margin-top: 45px;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+
+        .article {
+            border-bottom: 1px solid #9b907e;
+            padding-bottom: 30px;
+        }
+
+        .article-image {
+            height: 220px;
+            margin-bottom: 20px;
+            background-size: cover;
+            background-position: center;
+            filter: sepia(35%);
+        }
+
+        .image-1 {
+            background-image:
+                url("https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=800&q=80");
+        }
+
+        .image-2 {
+            background-image:
+                url("https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=800&q=80");
+        }
+
+        .image-3 {
+            background-image:
+                url("https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=800&q=80");
+        }
+
+        .article h3 {
+            font-size: 27px;
+            font-weight: normal;
+            line-height: 1.2;
+            margin: 10px 0 12px;
+        }
+
+        .article h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .article p {
+            color: #5d5548;
+            font-size: 15px;
+        }
+
+        /* =========================
+           QUOTE
+        ========================== */
+
+        .quote {
+            margin: 65px auto;
+            max-width: 800px;
+            text-align: center;
+            padding: 35px 20px;
+            border-top: 1px solid #29251f;
+            border-bottom: 1px solid #29251f;
+        }
+
+        .quote p {
+            font-size: 29px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .quote span {
+            display: block;
+            margin-top: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           NEWSLETTER
+        ========================== */
+
+        .newsletter {
+            text-align: center;
+            background: #29251f;
+            color: #eee4cf;
+            padding: 45px 25px;
+            margin-top: 60px;
+        }
+
+        .newsletter h2 {
+            font-size: 32px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            color: #c9bda8;
+            margin-bottom: 25px;
+        }
+
+        .newsletter form {
+            display: flex;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: #eee4cf;
+            color: #29251f;
+            font-family: Georgia, serif;
+        }
+
+        .newsletter button {
+            padding: 14px 22px;
+            border: none;
+            background: #b8a88e;
+            color: #29251f;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .newsletter button:hover {
+            background: #d0c1aa;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 25px;
+            text-align: center;
+            font-size: 13px;
+            color: #746957;
+        }
+
+        .footer-title {
+            font-size: 25px;
+            color: #29251f;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding-top: 20px;
+            }
+
+            .featured {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .featured-image {
+                min-height: 300px;
+            }
+
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-image {
+                height: 260px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            main {
+                padding: 30px 18px;
+            }
+
+            .brand h1 {
+                letter-spacing: -2px;
+            }
+
+            .featured-content h2 {
+                font-size: 36px;
+            }
+
+            .excerpt {
+                font-size: 16px;
+            }
+
+            .newsletter form {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .newsletter input,
+            .newsletter button {
+                width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Blog Alfiandi</h1>
-            <p>Catatan seputar teknologi, desain, dan pengalaman sehari-hari.</p>
-            <nav>
-                <a href="#">Beranda</a>
-                <a href="#">Tentang Saya</a>
-                <a href="#">Kontak</a>
-            </nav>
-        </header>
+    <!-- HEADER -->
 
-        <main>
-            <!-- Artikel 1 -->
-            <article class="post">
-                <h2 class="post-title"><a href="#">Membuat Website Pertama Menggunakan GitHub Pages</a></h2>
-                <div class="post-date">Dipublikasikan pada 9 Agustus 2026</div>
-                <p class="post-excerpt">
-                    GitHub Pages adalah layanan hosting gratis dari GitHub untuk menyimpan file HTML, CSS, dan JavaScript. Berikut adalah panduan singkat saat pertama kali menyiapkannya...
+    <header>
+
+        <div class="top-line">
+            Edisi Minggu · 9 Agustus 2026
+        </div>
+
+        <div class="brand">
+            <h1>Alfiandi</h1>
+
+            <p>
+                Catatan tentang sejarah, manusia,
+                pemikiran, dan kehidupan.
+            </p>
+        </div>
+
+        <nav>
+            <a href="#">Beranda</a>
+            <a href="#">Sejarah</a>
+            <a href="#">Sastra</a>
+            <a href="#">Budaya</a>
+            <a href="#">Pemikiran</a>
+            <a href="#">Tentang Saya</a>
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <div class="section-title">
+            Tulisan Pilihan
+        </div>
+
+
+        <!-- ARTIKEL UTAMA -->
+
+        <section class="featured">
+
+            <div class="featured-image">
+                <span>Sejarah</span>
+            </div>
+
+            <article class="featured-content">
+
+                <div class="category">
+                    Esai · 12 Menit Membaca
+                </div>
+
+                <h2>
+                    <a href="#">
+                        Ketika Sebuah Bangsa Belajar Berdiri
+                        di Atas Kakinya Sendiri
+                    </a>
+                </h2>
+
+                <p class="excerpt">
+                    Sejarah bukan sekadar kumpulan tanggal
+                    dan nama. Ia adalah rekaman tentang manusia
+                    yang mencoba memahami zamannya dan menentukan
+                    arah masa depan.
                 </p>
-                <a href="#" class="read-more">Baca Selengkapnya &rarr;</a>
+
+                <div class="meta">
+                    Oleh Alfiandi · 8 Agustus 2026
+                </div>
+
+                <a href="#" class="read-more">
+                    Baca selengkapnya →
+                </a>
+
             </article>
 
-            <!-- Artikel 2 -->
-            <article class="post">
-                <h2 class="post-title"><a href="#">Kenapa Memilih Blog Statis HTML Sederhana?</a></h2>
-                <div class="post-date">Dipublikasikan pada 1 Agustus 2026</div>
-                <p class="post-excerpt">
-                    Di era framework yang semakin rumit, menggunakan HTML murni memberikan kecepatan loading yang luar biasa, keamanan tinggi, serta tanpa biaya server bulanan...
-                </p>
-                <a href="#" class="read-more">Baca Selengkapnya &rarr;</a>
-            </article>
-        </main>
+        </section>
 
-        <footer>
-            <p>&copy; 2026 Alfiandi. Dihosting gratis di GitHub Pages.</p>
-        </footer>
-    </div>
+
+        <!-- TULISAN TERBARU -->
+
+        <section class="articles">
+
+            <div class="section-title">
+                Tulisan Terbaru
+            </div>
+
+            <div class="article-grid">
+
+
+                <article class="article">
+
+                    <div class="article-image image-1"></div>
+
+                    <div class="category">
+                        Sastra
+                    </div>
+
+                    <h3>
+                        <a href="#">
+                            Mengapa Kita Masih Membaca
+                            Buku-Buku Lama?
+                        </a>
+                    </h3>
+
+                    <p>
+                        Ada sesuatu yang tidak dimiliki zaman kita:
+                        kesabaran untuk mendengarkan suara dari masa lalu.
+                    </p>
+
+                    <div class="meta">
+                        Alfiandi · 6 Agustus 2026
+                    </div>
+
+                </article>
+
+
+                <article class="article">
+
+                    <div class="article-image image-2"></div>
+
+                    <div class="category">
+                        Pemikiran
+                    </div>
+
+                    <h3>
+                        <a href="#">
+                            Tentang Waktu, Ingatan,
+                            dan Kehidupan
+                        </a>
+                    </h3>
+
+                    <p>
+                        Waktu berjalan tanpa pernah meminta izin.
+                        Namun manusia selalu berusaha meninggalkan
+                        sesuatu yang membuatnya dikenang.
+                    </p>
+
+                    <div class="meta">
+                        Alfiandi · 4 Agustus 2026
+                    </div>
+
+                </article>
+
+
+                <article class="article">
+
+                    <div class="article-image image-3"></div>
+
+                    <div class="category">
+                        Budaya
+                    </div>
+
+                    <h3>
+                        <a href="#">
+                            Kota-Kota Tua dan Cerita
+                            yang Mereka Simpan
+                        </a>
+                    </h3>
+
+                    <p>
+                        Setiap jalan memiliki kenangan.
+                        Setiap bangunan menyimpan kehidupan
+                        orang-orang yang pernah melewatinya.
+                    </p>
+
+                    <div class="meta">
+                        Alfiandi · 1 Agustus 2026
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- KUTIPAN -->
+
+        <section class="quote">
+
+            <p>
+                “Menulis adalah cara sederhana untuk
+                membuat pikiran tetap hidup.”
+            </p>
+
+            <span>
+                — Alfiandi
+            </span>
+
+        </section>
+
+
+        <!-- TENTANG -->
+
+        <section class="newsletter">
+
+            <h2>Tentang Alfiandi</h2>
+
+            <p>
+                Sebuah ruang kecil untuk menyimpan gagasan,
+                cerita, sejarah, dan pemikiran tentang dunia
+                yang terus berubah.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-title">
+            Alfiandi
+        </div>
+
+        <p>
+            © 2026 Alfiandi · Tulisan dan pemikiran pribadi.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        // Animasi sederhana ketika halaman dimuat
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const articles =
+                document.querySelectorAll(".article");
+
+            articles.forEach(function (article, index) {
+
+                article.style.opacity = "0";
+                article.style.transform = "translateY(20px)";
+                article.style.transition =
+                    "opacity 0.6s ease, transform 0.6s ease";
+
+                setTimeout(function () {
+
+                    article.style.opacity = "1";
+                    article.style.transform = "translateY(0)";
+
+                }, 150 * index);
+
+            });
+
+        });
+
+    </script>
 
 </body>
-</html>
+        </html>
