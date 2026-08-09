@@ -1,0 +1,30 @@
+# Pengaturan Utama Website
+title: Alfiandi-ux
+description: Blog pribadi dan portofolio
+baseurl: "" # biarkan kosong
+url: "https://alfiandi-ux.github.io" # URL website Anda
+
+# Pengaturan Jekyll
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title.html
+
+# Plugin yang diperlukan (untuk meta tag dan pagination)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Pengecualian file/folder yang tidak perlu diproses Jekyll
+# JANGAN masukkan "admin" ke daftar ini
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Integrasi Decap CMS
+admin_url: /admin/
