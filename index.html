@@ -6,54 +6,64 @@ layout: null
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Judul web akan otomatis mengikuti pengaturan atau menggunakan nama default -->
   <title>{{ site.title | default: "Alfiandi-ux | Blog & Jurnal Visual" }}</title>
   
   <style>
-    /* Reset & Variabel Dasar CSS */
+    /* Reset & CSS Dasar */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #334155; line-height: 1.6; padding-bottom: 60px; }
     a { color: inherit; text-decoration: none; }
 
-    /* Navigasi / Header */
+    /* Header */
     header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; }
-    .nav-container { max-width: 960px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.25rem; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; }
     .logo span { color: #2563eb; }
 
-    /* Area Konten Utama */
-    .container { max-width: 960px; margin: 40px auto; padding: 0 20px; }
+    /* Container Utama */
+    .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
     .section-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #2563eb; margin-bottom: 24px; display: block; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
 
-    /* Sistem Grid untuk Kartu Artikel */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px; }
-    
-    /* Desain Kartu Artikel */
-    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); border-color: #cbd5e1; }
-    
-    /* Area Gambar Kartu */
-    .card-img { width: 100%; height: 220px; object-fit: cover; background-color: #f1f5f9; border-bottom: 1px solid #e2e8f0; transition: opacity 0.3s ease; }
-    .card:hover .card-img { opacity: 0.9; }
-    
-    /* Area Teks Kartu */
-    .card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-    .meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 0.8rem; color: #64748b; font-weight: 500; }
-    .badge { background: #eff6ff; color: #1d4ed8; padding: 4px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-    .card-title { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 10px; line-height: 1.4; }
-    .card-title a:hover { color: #2563eb; }
-    .post-excerpt { color: #475569; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
-    
-    /* Metadata Bawah (Tanggal & Penulis) */
-    .author-date { font-size: 0.8rem; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: auto; }
+    /* === GAYA ARTIKEL UTAMA (BESAR) === */
+    .hero-post { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; margin-bottom: 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); transition: transform 0.3s; }
+    .hero-post:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .hero-img-wrapper { width: 100%; height: 400px; overflow: hidden; background-color: #f1f5f9; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .hero-post:hover .hero-img { transform: scale(1.03); }
+    .hero-content { padding: 32px 40px; }
+    .hero-title { font-size: 2.2rem; font-weight: 800; color: #0f172a; margin: 12px 0 16px 0; line-height: 1.2; letter-spacing: -0.02em; }
+    .hero-title a:hover { color: #2563eb; }
+    .hero-excerpt { font-size: 1.1rem; color: #475569; margin-bottom: 24px; max-width: 800px; }
 
-    /* Footer */
+    /* === GAYA KARTU ARTIKEL BIASA === */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px; }
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); border-color: #cbd5e1; }
+    .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; background-color: #f1f5f9; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .card:hover .card-img { transform: scale(1.05); }
+    .card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-title { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin: 10px 0; line-height: 1.4; }
+    .card-title a:hover { color: #2563eb; }
+    .card-excerpt { color: #475569; font-size: 0.95rem; margin-bottom: 20px; }
+
+    /* Metadata Umum (Label, Tanggal, Penulis) */
+    .meta { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #64748b; font-weight: 500; }
+    .badge { background: #eff6ff; color: #1d4ed8; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .author-date { font-size: 0.85rem; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: auto; }
+
+    /* Responsivitas Layar Kecil */
+    @media (max-width: 768px) {
+      .hero-img-wrapper { height: 260px; }
+      .hero-content { padding: 24px; }
+      .hero-title { font-size: 1.6rem; }
+    }
+
     footer { text-align: center; font-size: 0.85rem; color: #94a3b8; margin-top: 80px; padding-top: 30px; border-top: 1px solid #e2e8f0; }
   </style>
 </head>
 <body>
 
-  <!-- Navigasi Atas -->
   <header>
     <div class="nav-container">
       <a href="{{ site.baseurl }}/" class="logo">Alfiandi<span>-ux</span></a>
@@ -62,54 +72,84 @@ layout: null
 
   <main class="container">
     
-    <span class="section-title">Kumpulan Tulisan Terbaru</span>
-
-    <!-- SISTEM LOOPING JEKYLL: Akan otomatis menarik data dari Decap CMS -->
-    <div class="grid">
-      {% for post in site.posts %}
-      <article class="card">
-        
-        <!-- BAGIAN PENARIKAN GAMBAR OTOMATIS -->
-        <a href="{{ post.url | relative_url }}">
+    <!-- ============================================== -->
+    <!-- 1. ARTIKEL TERBARU (HERO POST / TAMPILAN BESAR)-->
+    <!-- ============================================== -->
+    <!-- Kode limit:1 memastikan hanya 1 artikel paling baru yang ditarik ke sini -->
+    {% for post in site.posts limit:1 %}
+    <article class="hero-post">
+      <a href="{{ post.url | relative_url }}">
+        <div class="hero-img-wrapper">
           {% if post.image %}
-            <!-- Akan mengeksekusi ini jika di Decap CMS field gambarnya bernama 'image' -->
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="hero-img">
           {% elsif post.thumbnail %}
-            <!-- Akan mengeksekusi ini jika di Decap CMS field gambarnya bernama 'thumbnail' -->
-            <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="card-img">
+            <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="hero-img">
           {% else %}
-            <!-- Tampilan darurat jika artikel di-publish tanpa mengunggah gambar -->
-            <div class="card-img" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); color: #64748b; font-size: 0.85rem;">
-              Tanpa Sampul Visual
-            </div>
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e2e8f0; color: #64748b;">Tanpa Gambar</div>
           {% endif %}
+        </div>
+      </a>
+      
+      <div class="hero-content">
+        <div class="meta">
+          {% if post.tags.size > 0 %}<span class="badge">{{ post.tags[0] }}</span>{% else %}<span class="badge">Terbaru</span>{% endif %}
+          <span>{{ post.date | date: "%-d %B %Y" }}</span>
+        </div>
+        
+        <h1 class="hero-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h1>
+        
+        <!-- Cuplikan lebih panjang untuk artikel utama (30 kata) -->
+        <p class="hero-excerpt">
+          {{ post.excerpt | strip_html | truncatewords: 30 }}
+        </p>
+        
+        <div style="font-size: 0.9rem; font-weight: 600; color: #0f172a;">
+          Oleh {{ post.author | default: "Alfiandi" }}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+
+    <!-- ============================================== -->
+    <!-- 2. ARTIKEL LAINNYA (GRID / THUMBNAIL)          -->
+    <!-- ============================================== -->
+    <span class="section-title">Bacaan Lainnya</span>
+    
+    <div class="grid">
+      <!-- Kode offset:1 memastikan artikel pertama dilompati (karena sudah muncul di atas) -->
+      {% for post in site.posts offset:1 %}
+      <article class="card">
+        <a href="{{ post.url | relative_url }}">
+          <div class="card-img-wrapper">
+            {% if post.image %}
+              <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img">
+            {% elsif post.thumbnail %}
+              <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="card-img">
+            {% else %}
+              <div style="width: 100%; height: 100%; background: #e2e8f0;"></div>
+            {% endif %}
+          </div>
         </a>
         
         <div class="card-content">
           <div>
-            <div class="meta">
-              <!-- Menarik Kategori/Tag otomatis dari CMS -->
-              {% if post.tags.size > 0 %}
-                <span class="badge">{{ post.tags[0] }}</span>
-              {% else %}
-                <span class="badge">Artikel</span>
-              {% endif %}
+            <div class="meta" style="margin-bottom: 12px;">
+              {% if post.tags.size > 0 %}<span class="badge">{{ post.tags[0] }}</span>{% endif %}
             </div>
             
-            <!-- Judul Artikel Otomatis -->
             <h3 class="card-title">
               <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
             </h3>
             
-            <!-- Cuplikan Isi Artikel Otomatis (Maksimal 18 Kata) -->
-            <p class="post-excerpt">
-              {{ post.excerpt | strip_html | truncatewords: 18 }}
+            <p class="card-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 15 }}
             </p>
           </div>
           
-          <!-- Tanggal dan Penulis Otomatis -->
           <div class="author-date">
-            {{ post.date | date: "%-d %B %Y" }} • Oleh {{ post.author | default: "Alfiandi" }}
+            {{ post.date | date: "%-d %B %Y" }}
           </div>
         </div>
       </article>
